@@ -7,6 +7,22 @@ use Illuminate\Database\Eloquent\Model;
 class Doctor extends Model
 {
     protected $fillable = [
-        'user_id', 'bdmc_no', 'address', 'score'
+        'user_id',
+        'bdmc_no',
+        'speciality',
+        'district_id',
+        'thana_id',
+        'patient_no',
+        'score',
+        'chamber_address',
+        'appointment',
+        'about_doctor',
+        'no_rating'
     ];
+    protected $with = array('detail');
+
+    public function detail()
+    {
+        return $this->hasOne('App\User', 'id', 'user_id');
+    }
 }

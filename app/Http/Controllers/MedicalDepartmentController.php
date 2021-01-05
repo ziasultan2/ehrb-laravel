@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\models\MedicalDepartment;
 use Illuminate\Http\Request;
+use App\models\Doctor;
 
-class ObservationController extends Controller
+class MedicalDepartmentController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,7 +15,8 @@ class ObservationController extends Controller
      */
     public function index()
     {
-        //
+        $data = MedicalDepartment::all();
+        return response()->json(['departments' => $data]);
     }
 
     /**
@@ -45,7 +48,8 @@ class ObservationController extends Controller
      */
     public function show($id)
     {
-        //
+        $data = Doctor::where('speciality', '=', $id)->get();
+        return response()->json(['doctors' => $data]);
     }
 
     /**

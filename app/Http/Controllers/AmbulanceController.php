@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\models\Radiology;
+use App\models\Ambulance;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
-class RadiologyController extends Controller
+class AmbulanceController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -41,21 +42,36 @@ class RadiologyController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\models\Radiology  $radiology
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Radiology $radiology)
+    public function show($lat, $long)
     {
-        //
+
+        $ambulance = DB::table("ambulances")
+            ->select(
+                "ambulances.*",
+                DB::raw("6371 * acos(cos(radians(" . $lat . "))
+                        * cos(radians(latitude))
+                        * cos(radians(longitude) - radians(" . $long . "))
+                        + sin(radians(" . $lat . "))
+                        * sin(radians(latitude))) AS distance")
+            )
+            ->where('status', '=', '1')
+            ->orderBy('distance')
+            ->take(10)
+            ->get();
+
+        return response()->json(['ambulance' => $ambulance]);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\models\Radiology  $radiology
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Radiology $radiology)
+    public function edit($id)
     {
         //
     }
@@ -64,10 +80,10 @@ class RadiologyController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\models\Radiology  $radiology
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Radiology $radiology)
+    public function update(Request $request, $id)
     {
         //
     }
@@ -75,10 +91,10 @@ class RadiologyController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\models\Radiology  $radiology
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Radiology $radiology)
+    public function destroy($id)
     {
         //
     }

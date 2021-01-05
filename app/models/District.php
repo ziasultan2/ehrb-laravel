@@ -4,9 +4,9 @@ namespace App\models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Observation extends Model
+class District extends Model
 {
     protected $fillable = [
-        'date', 'details', 'appointment_id'
+        'name'
     ];
 }

@@ -17,8 +17,11 @@ class CreateDoctorsTable extends Migration
             $table->bigIncrements('id');
             $table->integer('user_id');
             $table->integer('bdmc_no');
-            $table->string('address');
+            $table->integer('district_id');
+            $table->integer('thana_id');
+            $table->integer('patient_no');
             $table->integer('score');
+            $table->integer('no_rating');
             $table->timestamps();
         });
     }

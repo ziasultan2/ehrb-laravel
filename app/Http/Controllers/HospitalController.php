@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\models\Hospital;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class HospitalController extends Controller
 {
@@ -13,7 +15,6 @@ class HospitalController extends Controller
      */
     public function index()
     {
-        //
     }
 
     /**
@@ -43,9 +44,22 @@ class HospitalController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($lat, $long)
     {
-        //
+        $data =  DB::table("hospitals")
+            ->select(
+                "hospitals.*",
+                DB::raw("6371 * acos(cos(radians(" . $lat . "))
+                    * cos(radians(latitude))
+                    * cos(radians(longitude) - radians(" . $long . "))
+                    + sin(radians(" . $lat . "))
+                    * sin(radians(latitude))) AS distance")
+            )
+            ->orderBy('distance')
+            ->take(10)
+            ->get();
+
+        return response()->json(['hospital' => $data]);
     }
 
     /**

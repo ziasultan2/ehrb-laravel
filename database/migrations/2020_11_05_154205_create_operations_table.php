@@ -21,6 +21,7 @@ class CreateOperationsTable extends Migration
             $table->timestamp('date');
             $table->integer('rating');
             $table->string('remarks');
+            $table->integer('status');
             $table->timestamps();
         });
     }

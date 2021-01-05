@@ -17,10 +17,12 @@ class CreateHospitalsTable extends Migration
             $table->bigIncrements('id');
             $table->string('name', 250);
             $table->string('phone', 15);
-            $table->tinyInteger('thana');
             $table->tinyInteger('district');
+            $table->tinyInteger('thana');
             $table->string('address');
             $table->string('license_no');
+            $table->double('latitude', 20, 15);
+            $table->double('longitude', 20, 10);
             $table->timestamps();
         });
     }

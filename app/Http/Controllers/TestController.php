@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\models\Test;
 use Illuminate\Http\Request;
 
 class TestController extends Controller
@@ -45,7 +46,8 @@ class TestController extends Controller
      */
     public function show($id)
     {
-        //
+        $data = Test::where('user_id', '=', $id)->get();
+        return response()->json(['tests' => $data]);
     }
 
     /**

@@ -17,6 +17,7 @@ class CreateAllergiesTable extends Migration
             $table->bigIncrements('id');
             $table->string('name');
             $table->integer('appointment_id');
+            $table->boolean('status');
             $table->softDeletes();
             $table->timestamps();
         });

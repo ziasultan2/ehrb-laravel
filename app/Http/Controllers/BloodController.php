@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
 use Illuminate\Http\Request;
 
-class PrecautionController extends Controller
+class BloodController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -43,9 +44,11 @@ class PrecautionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($thanaId)
     {
-        //
+        $data = User::where('thana_id', '=', $thanaId)
+            ->get();
+        return response()->json(['blood' => $data]);
     }
 
     /**

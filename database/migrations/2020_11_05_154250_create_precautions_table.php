@@ -17,6 +17,7 @@ class CreatePrecautionsTable extends Migration
             $table->bigIncrements('id');
             $table->string('name', 250);
             $table->integer('appointment_id');
+            $table->boolean('status');
             $table->softDeletes();
             $table->timestamps();
         });

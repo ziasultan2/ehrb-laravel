@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\models\Appointment;
+use App\Services\AppointmentService;
 
 class HomeController extends Controller
 {
@@ -11,8 +13,10 @@ class HomeController extends Controller
      *
      * @return void
      */
-    public function __construct()
+    private $appointmentService;
+    public function __construct(AppointmentService $appointmentService)
     {
+        $this->appointmentService = $appointmentService;
         $this->middleware('auth');
     }
 
@@ -23,6 +27,27 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        // User role
+        $role = \Auth::user()->type;
+
+        // Check user role
+        switch ($role) {
+            case '1':
+                return view('home');
+                break;
+            case '2':
+                $app = $this->appointmentService->getDoctorAppointment();
+                return view('doctor.appointment', compact('app'));
+                break;
+            case '3':
+                return view('/hospital');
+                break;
+            case '4':
+                return view('/diagnostic');
+                break;
+            default:
+                return '/login';
+                break;
+        }
     }
 }

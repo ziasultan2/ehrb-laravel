@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\models\Medication;
 use Illuminate\Http\Request;
 
 class MedicationController extends Controller
@@ -45,7 +46,8 @@ class MedicationController extends Controller
      */
     public function show($id)
     {
-        //
+        $data = Medication::where('user_id', '=', $id)->get();
+        return response()->json(['medicine' => $data]);
     }
 
     /**

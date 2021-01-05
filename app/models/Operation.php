@@ -12,6 +12,7 @@ class Operation extends Model
         'hospital_id',
         'date',
         'rating',
-        'remarks'
+        'remarks',
+        'dispute'
     ];
 }

@@ -19,7 +19,6 @@ class CreateMedicationsTable extends Migration
             $table->string('name');
             $table->string('dose');
             $table->string('intervals');
-            $table->string('notes');
             $table->integer('duration');
             $table->integer('appointment_id');
             $table->integer('status');

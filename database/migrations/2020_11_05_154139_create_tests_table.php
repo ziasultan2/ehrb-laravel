@@ -16,10 +16,12 @@ class CreateTestsTable extends Migration
         Schema::create('tests', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name');
+            $table->integer('type');
             $table->string('result', 255);
             $table->integer('tested_in');
             $table->bigInteger('diagnostic_center_id');
-            $table->bigInteger('doctor_id');
+            $table->bigInteger('appointment_id');
+            $table->integer('tested_by');
             $table->timestamps();
         });
     }
