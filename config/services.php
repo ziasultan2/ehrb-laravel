@@ -34,4 +34,11 @@ return [
         'secret' => env('SPARKPOST_SECRET'),
     ],
 
+    'firebase' => [
+        'api_key' => 'AIzaSyDhSJPRA9qKn825gCuTia3uD8wRcuRTLxQ', // Only used for JS integration
+        'auth_domain' => 'auth_domain', // Only used for JS integration
+        'database_url' => 'https://foodlover-d3907.firebaseio.com/',
+        'storage_bucket' => '', // Only used for JS integration
+    ],
+
 ];

@@ -2,10 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\User;
 use Illuminate\Http\Request;
 
-class BloodController extends Controller
+class AdminController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +13,7 @@ class BloodController extends Controller
      */
     public function index()
     {
-        //
+        return view('admin.admin');
     }
 
     /**
@@ -44,12 +43,9 @@ class BloodController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($thanaId, $blood)
+    public function show($id)
     {
-        $data = User::where('thana_id', '=', $thanaId)
-            ->where('blood_group', '=', $blood)
-            ->get();
-        return response()->json(['blood' => $data]);
+        //
     }
 
     /**

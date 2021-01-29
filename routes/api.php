@@ -29,11 +29,13 @@ Route::group(['prefix' => '/login'], function () {
 // Route::group(['prefix' => 'user', 'middleware' => 'auth:api'], function ()
 Route::group(['prefix' => '/user', 'middleware' => 'auth:api'], function () {
     Route::resource('appointment', 'AppointmentController');
-    Route::get('hospital/{latitude}/{longitude}', 'HospitalController@show');
+    Route::get('hospital/{id}', 'HospitalController@show');
     Route::get('ambulance/{latitude}/{longitude}', 'AmbulanceController@show');
-    Route::get('blood/{thana}', 'BloodController@show');
-    Route::get('test/{id}', 'TestController@show');
+    Route::get('blood/{thana}/{group}', 'BloodController@show');
+    Route::get('test', 'TestController@index');
     Route::get('medicine/{id}', 'MedicationController@show');
+    Route::get('medicines/{id}', 'MedicineListController@getGeneric');
     Route::resource('department', 'MedicalDepartmentController');
     Route::resource('district', 'DistrictController');
+    Route::resource('emergency', 'EmergencyController');
 });

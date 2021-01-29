@@ -8,7 +8,7 @@ class AppointmentService
 {
     public function getDoctorAppointment()
     {
-        return Appointment::where('doctor_id', \Auth::user()->getDoctorId())->with('user')->get();
+        return Appointment::where('doctor_id', \Auth::user()->getDoctorId())->where('date', '=', date("Y/m/d"))->with('user')->get();
     }
 
     public function getUserAppointment()

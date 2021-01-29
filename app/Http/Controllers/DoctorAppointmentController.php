@@ -6,9 +6,20 @@ use App\models\Appointment;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use App\models\Doctor;
+use App\models\MedicineList;
+use App\models\Test;
+use App\models\TestLists;
+use App\Services\DoctorAppointmentService;
 
 class DoctorAppointmentController extends Controller
 {
+    /** @var DoctorAppointmentService  */
+    private $doctorAppointmentService;
+
+    public function __construct(DoctorAppointmentService $doctorAppointmentService)
+    {
+        $this->doctorAppointmentService = $doctorAppointmentService;
+    }
     /**
      * Display a listing of the resource.
      *
@@ -16,24 +27,7 @@ class DoctorAppointmentController extends Controller
      */
     public function index()
     {
-        $id = 1;
-        $today = Carbon::now()->format('d-m-Y');
-        $day = 'Fri';
-        $appointmentDate = Carbon::parse("next " . $day)->format('d-m-Y');
-
-        $doctor = Doctor::where('user_id', '=', 1)->first();
-        $appointment = $doctor->appointment;
-        $data = $this->textToJson($appointment);
-
-        return $data['days'][1];
-    }
-
-    public function textToJson($string)
-    {
-        $string = str_replace('\n', '', $string);
-        $string = rtrim($string, ',');
-        $json = json_decode($string, true);
-        return $json;
+        return 'hello\n world';
     }
 
     /**
@@ -54,7 +48,7 @@ class DoctorAppointmentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        return $this->doctorAppointmentService->create($request);
     }
 
     /**
@@ -65,7 +59,10 @@ class DoctorAppointmentController extends Controller
      */
     public function show($id)
     {
-        //
+        $test = TestLists::all();
+        $medicine = MedicineList::all();
+
+        return view('doctor.appointment_details', compact(['test', 'medicine']));
     }
 
     /**

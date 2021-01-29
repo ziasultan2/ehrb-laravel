@@ -44,20 +44,9 @@ class HospitalController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($lat, $long)
+    public function show($id)
     {
-        $data =  DB::table("hospitals")
-            ->select(
-                "hospitals.*",
-                DB::raw("6371 * acos(cos(radians(" . $lat . "))
-                    * cos(radians(latitude))
-                    * cos(radians(longitude) - radians(" . $long . "))
-                    + sin(radians(" . $lat . "))
-                    * sin(radians(latitude))) AS distance")
-            )
-            ->orderBy('distance')
-            ->take(10)
-            ->get();
+        $data =  Hospital::where('thana_id', $id)->get();
 
         return response()->json(['hospital' => $data]);
     }

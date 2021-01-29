@@ -9,9 +9,9 @@
 
                 <div class="card-body">
                     @foreach ($appointments as $appointment)
-                        <a href="{{ url('appointment/' . $appointment->id) }}"><li class="list-group-item d-flex justify-content-between align-items-center">
+                        <a href="{{ url('doctor/appointment/' . $appointment->id) }}"><li class="list-group-item d-flex justify-content-between align-items-center">
                             {{$appointment['user']['name']}}
-                            <span class="badge badge-primary badge-pill">{{$appointment->id}}</span>
+                            <span class="badge badge-primary badge-pill">{{$appointment->serial_id}}</span>
                         </li></a>
                     @endforeach
                 </div>

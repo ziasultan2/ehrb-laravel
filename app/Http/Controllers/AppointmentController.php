@@ -4,12 +4,13 @@ namespace App\Http\Controllers;
 
 
 use App\models\Appointment;
-
+use App\models\AppointmentDetail;
 use App\models\TestLists;
 use App\Services\AppointmentService;
 use App\Services\UserAppointmentService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class AppointmentController extends Controller
 {
@@ -24,13 +25,14 @@ class AppointmentController extends Controller
     public function index()
     {
         $userId = Auth::id();
-        $appointment = Appointment::where('user_id', '=', $userId)->get();
-        return response()->json(['appointments' => $appointment]);
+        $appointmentDetail = AppointmentDetail::where('user_id', '=', $userId)
+            ->get();
+        return response()->json(['appointments' => $appointmentDetail]);
     }
 
     public function show($id)
     {
-        $data = Appointment::where('id', '=', $id)->with('test', 'medicine')->first();
+        $data = AppointmentDetail::where('appointment_id', '=', $id)->with('test', 'medicine')->first();
         return response()->json(['appointment' => $data]);
     }
 

@@ -27,12 +27,12 @@ class UserAppointmentService
             return response()->json(['success' => true, 'appointment' => $result]);
         }
 
-        return response()->json(['success' => false]);
+        return response()->json(['success' => $availableDTO->getSerialNo()]);
     }
 
     public function checkAvailable($json, $day)
     {
-        for ($i = 0; $i < count($json['days']) - 1; $i++) {
+        for ($i = 0; $i < count($json['days']); $i++) {
             $dayDetail = $json['days'][$i];
             if ($dayDetail['day'] == $day) {
                 if ($dayDetail['patient'] < $dayDetail['limit']) {

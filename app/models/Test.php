@@ -14,7 +14,6 @@ class Test extends Model
         'tested_in',
         'diagnostic_center_id',
         'appointment_id',
-        'tested_by'
     ];
 
     protected $with = array('testDetail');

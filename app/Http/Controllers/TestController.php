@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\models\Test;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class TestController extends Controller
 {
@@ -14,7 +15,8 @@ class TestController extends Controller
      */
     public function index()
     {
-        //
+        $data = Test::where('user_id', '=', Auth::id())->get();
+        return response()->json(['tests' => $data]);
     }
 
     /**

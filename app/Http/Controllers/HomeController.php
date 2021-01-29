@@ -32,18 +32,18 @@ class HomeController extends Controller
 
         // Check user role
         switch ($role) {
-            case '1':
+            case 'user':
                 return view('home');
                 break;
-            case '2':
-                $app = $this->appointmentService->getDoctorAppointment();
-                return view('doctor.appointment', compact('app'));
+            case 'doctor':
+                $appointments = $this->appointmentService->getDoctorAppointment();
+                return view('doctor.appointment', compact('appointments'));
                 break;
-            case '3':
+            case 'diagnostic_center':
                 return view('/hospital');
                 break;
-            case '4':
-                return view('/diagnostic');
+            case 'admin':
+                return view('admin.admin');
                 break;
             default:
                 return '/login';

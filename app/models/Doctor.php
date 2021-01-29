@@ -14,6 +14,7 @@ class Doctor extends Model
         'thana_id',
         'patient_no',
         'score',
+        'short_bio',
         'chamber_address',
         'appointment',
         'about_doctor',
